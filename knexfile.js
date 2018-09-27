@@ -1,11 +1,22 @@
 // Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'pg',
     connection: {
-      filename: './dev.sqlite3'
+      host: process.env.POSTGRES_HOSTNAME,
+      database: process.env.POSTGRES_DB,
+      port: process.env.POSTGRES_CONTAINER_PORT,
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD
+    },
+    migrations: {
+      directory: __dirname + '/db/migrations'
+    },
+    seeds: {
+      directory: __dirname + '/db/seeds'
     }
   },
 
