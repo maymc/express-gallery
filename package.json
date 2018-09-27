@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/maymc/express-gallery#readme",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
     "knex": "^0.15.2",
     "pg": "^7.4.3"
   }
