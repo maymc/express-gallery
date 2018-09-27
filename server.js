@@ -15,10 +15,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Creates a simple Express app - basic way to register a Handlebars view engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
+app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
-app.get("/", (req, reS) => {
+app.get("/", (req, res) => {
   res.render("home");
 })
 
