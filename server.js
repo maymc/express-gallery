@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
+//~~~~~~~ Routes ~~~~~~~~//
 app.get("/", (req, res) => {
   res.render("home");
 })
