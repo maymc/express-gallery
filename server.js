@@ -18,7 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('handlebars', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
-
+app.get("/", (req, reS) => {
+  res.render("home");
+})
 
 
 
