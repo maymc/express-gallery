@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "dev": "nodemon server.js",
+    "migrate": "POSTGRES_HOSTNAME=localhost POSTGRES_CONTAINER_PORT=5432 npx knex migrate:latest",
+    "seed": "POSTGRES_HOSTNAME=localhost POSTGRES_CONTAINER_PORT=5432 npx knex seed:run"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "knex": "^0.15.2",
+    "nodemon": "^1.18.4",
     "pg": "^7.4.3"
   }
 }
