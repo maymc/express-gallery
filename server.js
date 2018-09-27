@@ -7,12 +7,16 @@ const exphbs = require('express-handlebars');
 // const Tasks = require('./db/models/Tasks');
 // const Users = require('./db/models/Users');
 
+//Tells Express to use a static directory that we define as the location to look for requests
+app.use(express.static("public"));
 
+//Returns already parsed info/object as "req.body"
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+//Creates a simple Express app - basic way to register a Handlebars view engine
+app.engine('handlebars', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
+app.set('view engine', '.hbs');
 
 
 
