@@ -6,8 +6,7 @@ knex = require('../knex/knex.js');
 //render out a "new photo" form
 Router.get('/gallery/new', (req, res) => {
   console.log("IM HEREEEE");
-  let isAddingPhoto = true;
-  res.render("new", { isAddingPhoto });
+  res.render("new");
 });
 
 //render out gallery picture details
@@ -37,22 +36,20 @@ Router.get('/', (req, res) => {
     })
 });
 
+// POST - Create a new gallery photo
+Router.post('/gallery', (req, res) => {
+  console.log("\nreq.body:", req.body);
+  const gallery = req.body;
+  console.log("\ngallery:", gallery);
 
-
-
-
-// // add gallery picture
-// Router.post('/gallery/new', (req, res) => {
-//   const gallery = req.body;
-//   knex.raw(`INSERT INTO gallery (author, link, description) VALUES ('${gallery.author}', '${gallery.link}', '${gallery.description}')`)
-//     .then(result => {
-//       res.redirect('/');
-//     })
-//     .catch(err => {
-//       console.log('error', err)
-//       res.redirect('/')
-//     })
-// });
+  knex.raw(`INSERT INTO gallery (author, link, description) VALUES ('${gallery.author}', '${gallery.link}', '${gallery.description}')`)
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch(err => {
+      console.log('POST - adding photo error', err)
+    })
+});
 
 // //render out gallery edit get form
 // Router.get('/gallery/:id/edit', (req, res) => {
