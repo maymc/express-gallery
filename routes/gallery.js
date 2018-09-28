@@ -15,18 +15,19 @@ Router.get('/', (req, res) => {
     })
 });
 
-// //render out gallery picture details
-// Router.get('/gallery/:id', (req, res) => {
-//   const { id } = req.params;
-//   knex.raw(`SELECT * FROM articles WHERE id = '${id}'`)
-//     .then(result => {
-//       const galleryItems = result.rows[0];
-//       res.render('articledetails', { galleryItems });
-//     })
-//     .catch(err => {
-//       console.log('error', err);
-//     })
-// });
+//render out gallery picture details
+Router.get('/gallery/:id', (req, res) => {
+  const { id } = req.params;
+  knex.raw(`SELECT * FROM gallery WHERE id = '${id}'`)
+    .then(results => {
+      const galleryPhoto = results.rows[0];
+      console.log("\nGET photo results:", galleryPhoto);
+      res.render('galleryPhoto', galleryPhoto);
+    })
+    .catch(err => {
+      console.log('error', err);
+    })
+});
 
 // //render out gallery form
 // Router.get('/new', (req, res) => {

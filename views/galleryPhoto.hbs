@@ -11,12 +11,16 @@ each gallery photo should include a link to edit this gallery photo --}}
     change and create amazing digital images to inspire others to follow in our innovative steps. Free Architect
     WordPress Theme</p>
 </div>
-
-<p>
-  {{description}} - {{link}}
-  <br>
-  By: {{author}}
-</p>
-
-<a class="edit" href="/gallery/{{id}}/edit"></a>
 <br>
+
+<div>
+  <p>{{description}} - {{link}}</p>
+  <p>By: {{author}}</p>
+  <img src={{link}} alt="{{description}}">
+</div>
+
+<br>
+<a class="edit" href="/gallery/{{id}}/edit">Edit Photo</a>
+<br>
+
+<a class="redirect" href="/">Back to gallery</a>
