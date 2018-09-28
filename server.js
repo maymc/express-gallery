@@ -30,6 +30,7 @@ app.get("/", (req, res) => {
 app.use('/', galleryRoutes);
 
 
+
 app.listen(PORT, () => {
   console.log(`Started app on port: ${PORT}`);
 })
