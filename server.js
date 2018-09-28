@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
+const methodOverride = require('method-override');
 
 //Linking gallery routes
 const galleryRoutes = require('./routes/gallery.js');
@@ -17,6 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Creates a simple Express app - basic way to register a Handlebars view engine
 app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
+
+//Setup for method-override
+app.use(methodOverride('_method'));
 
 //~~~~~~~ Routes ~~~~~~~~//
 // app.get("/", (req, res) => {
