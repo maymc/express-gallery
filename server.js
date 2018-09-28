@@ -4,9 +4,6 @@ const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 
-// const Tasks = require('./db/models/Tasks');
-// const Users = require('./db/models/Users');
-
 //Linking gallery routes
 const galleryRoutes = require('./routes/gallery.js');
 
@@ -22,9 +19,9 @@ app.engine('.hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
 //~~~~~~~ Routes ~~~~~~~~//
-app.get("/", (req, res) => {
-  res.render("home");
-})
+// app.get("/", (req, res) => {
+//   res.render("home");
+// })
 
 //Use Express router to access gallery routes
 app.use('/', galleryRoutes);
