@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.EXPRESS_CONTAINER_PORT || 3002;
+const PORT = process.env.EXPRESS_CONTAINER_PORT;
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
