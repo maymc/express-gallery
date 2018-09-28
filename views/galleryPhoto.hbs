@@ -1,3 +1,22 @@
 {{!-- For a single gallery photo --}}
 {{!-- each gallery photo should include a link to delete this gallery photo
 each gallery photo should include a link to edit this gallery photo --}}
+
+<div id='title'>
+  <h1>_ARCHITEKT</h1>
+</div>
+
+<div class="description">
+  <p id='bio'>Welcome to our online portfolio, we are small group of passionate designers and architects, looking to
+    change and create amazing digital images to inspire others to follow in our innovative steps. Free Architect
+    WordPress Theme</p>
+</div>
+
+<p>
+  {{description}} - {{link}}
+  <br>
+  By: {{author}}
+</p>
+
+<a class="edit" href="/gallery/{{id}}/edit"></a>
+<br>
