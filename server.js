@@ -7,6 +7,9 @@ const exphbs = require('express-handlebars');
 // const Tasks = require('./db/models/Tasks');
 // const Users = require('./db/models/Users');
 
+//Linking gallery routes
+const galleryRoutes = require('./routes/gallery.js');
+
 //Tells Express to use a static directory that we define as the location to look for requests
 app.use(express.static("public"));
 
@@ -23,6 +26,8 @@ app.get("/", (req, res) => {
   res.render("home");
 })
 
+//Use Express router to access gallery routes
+app.use('/', galleryRoutes);
 
 
 app.listen(PORT, () => {
