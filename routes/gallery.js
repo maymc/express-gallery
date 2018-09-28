@@ -3,13 +3,27 @@ const express = require('express');
 const Router = express.Router();
 knex = require('../knex/knex.js');
 
-//render out a "new photo" form
+//GET - render out a "new photo" form
 Router.get('/gallery/new', (req, res) => {
   console.log("IM HEREEEE");
   res.render("new");
 });
 
-//render out gallery picture details
+//GET - render out gallery edit form
+Router.get('/gallery/:id/edit', (req, res) => {
+  console.log("\nThis is GET - /gallery/:id/edit");
+  console.log("\nreq.params:", req.params);
+
+  const { id } = req.params;
+  knex.raw(`SELECT * FROM gallery WHERE id = '${id}'`)
+    .then(result => {
+      const photoToEdit = result.rows[0];
+      console.log("photoToEdit:", photoToEdit);
+      res.render('edit', photoToEdit);
+    })
+});
+
+//GET - render out gallery picture details
 Router.get('/gallery/:id', (req, res) => {
   console.log("\nThis is GET /gallery/:id");
   const { id } = req.params;
@@ -24,7 +38,7 @@ Router.get('/gallery/:id', (req, res) => {
     })
 });
 
-//render out get gallery home route
+//GET - render out get gallery home route
 Router.get('/', (req, res) => {
   knex.raw('SELECT * FROM gallery')
     .then(results => {
@@ -51,27 +65,22 @@ Router.post('/gallery', (req, res) => {
     })
 });
 
-// //render out gallery edit get form
-// Router.get('/gallery/:id/edit', (req, res) => {
-//   const { id } = req.params;
-//   knex.raw(`SELECT * FROM gallery WHERE id = '${id}'`)
-//     .then(result => {
-//       const galleryToEdit = result.rows[0];
-//       res.render('edit', { galleryToEdit });
-//     })
-// });
+//PUT - edit gallery photo
+Router.put('/gallery/:id', (req, res) => {
+  console.log("This is PUT /gallery/:id");
+  console.log("\nPUT - req.params:", req.params);
+  console.log("\nPUT - req.body:", req.body);
 
-// //edit gallery put
-// Router.put('/gallery/:id', (req, res) => {
-//   const { id } = req.params;
-//   knex.raw(`UPDATE gallery SET author = '${req.body.author}', link = '${req.body.link}', description = ${req.body.description} WHERE id = ${id}`)
-//     .then(result => {
-//       res.redirect(`/${id}`);
-//     })
-//     .catch(err => {
-//       console.log('error', err)
-//     });
-// });
+  const { id } = req.params;
+
+  knex.raw(`UPDATE gallery SET author = '${req.body.author}', link = '${req.body.link}', description = '${req.body.description}' WHERE id = ${id}`)
+    .then(() => {
+      res.redirect(`/gallery/${id}`);
+    })
+    .catch(err => {
+      console.log('error', err)
+    });
+});
 
 // //delete gallery picture
 // Router.delete('/gallery/:id', (req, res) => {

@@ -11,15 +11,15 @@ description : TextArea --}}
 <form action="/gallery/{{id}}?_method=PUT" method="post">
   <h1 class="editSection">Editing photo:</h1>
   <label>Author:<br>
-    <textarea name="author" id=""></textarea>
+    <textarea name="author" id="">{{author}}</textarea>
   </label>
   <br><br>
   <label>Link:<br>
-    <textarea name="link" id=""></textarea>
+    <textarea name="link" id="">{{link}}</textarea>
   </label>
   <br><br>
   <label>Description:<br>
-    <textarea name="description" id=""></textarea>
+    <textarea name="description" id="">{{description}}</textarea>
   </label>
   <br><br>
   <input class="submitBtn" type="submit" value="Submit">
