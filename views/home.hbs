@@ -10,31 +10,10 @@
     WordPress Theme</p>
 </div>
 
-{{!-- <div class="row1">
-  <div id="img1">
-
-    <img src="../public/winterCabin.jpg" alt="mountain hill cabin winter">
-    <p id="img1-title">Mountain Hill Cabin Winter</p>
-    <p class="link">www.fantasticnorway.no</p>
-
-  </div>
-
-  <div id="img2">
-    <img src="../public/bronnoy.jpg" alt="Bronnoy Kunstbase">
-    <p id="img2-title">Bronnoy Kunstbase</p>
-    <p class="link">www.fantasticnorway.no</p>
-  </div>
-
-  <div id="img3">
-    <img src="../public/kneisen.jpg" alt="Kneisen Visitors Center">
-    <p id="img3-title">Kneisen Visitors Center</p>
-    <p class="link">www.fantasticnorway.no</p>
-  </div>
-</div> --}}
 {{#each galleryItems}}
 <div>
   <a href="/gallery/{{id}}">
-    <img src={{link}} alt="{{description}}">
+    <img src="{{link}}" alt="{{description}}">
   </a>
   <p class="img-title">{{description}}</p>
   <p class="link">{{link}}</p>
@@ -42,4 +21,5 @@
 {{/each}}
 
 <br><br>
-<a class="new" href="/gallery/new">Add New Photo</a>
+<a href="/gallery/new">Add New Photo</a>
+<br><br>
