@@ -2,14 +2,12 @@
 {{!-- each gallery photo should include a link to delete this gallery photo
 each gallery photo should include a link to edit this gallery photo --}}
 
-<div id='title'>
-  <h1>_ARCHITEKT</h1>
-</div>
+<div id="header">
+  <div id='title'>_ARCHITEKT</div>
 
-<div class="description">
-  <p id='bio'>Welcome to our online portfolio, we are small group of passionate designers and architects, looking to
+  <div id='bio'> Welcome to our online portfolio, we are small group of passionate designers and architects, looking to
     change and create amazing digital images to inspire others to follow in our innovative steps. Free Architect
-    WordPress Theme</p>
+    WordPress Theme </div>
 </div>
 <br>
 
@@ -19,8 +17,8 @@ each gallery photo should include a link to edit this gallery photo --}}
   <img src={{link}} alt="{{description}}">
 </div>
 
-<br>
-<a class="edit" href="/gallery/{{id}}/edit">Edit Photo</a>
-<br>
+<br><br>
+<a class="edit" href="/gallery/{{id}}/edit"><i class="fas fa-pencil-alt"></i> Edit Photo</a>
+<br><br>
 
-<a class="redirect" href="/">Back to gallery</a>
+<a class="redirect" href="/"><i class="fas fa-angle-double-left"></i> Back to gallery</a>

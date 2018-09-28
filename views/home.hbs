@@ -1,25 +1,26 @@
 <!--Content for the app's home view which will be rendered into the layout's {{{body}}}-->
 
-<div id='title'>
-  <h1>_ARCHITEKT</h1>
-</div>
+<div id="header">
+  <div id='title'>_ARCHITEKT</div>
 
-<div class="description">
-  <p id='bio'>Welcome to our online portfolio, we are small group of passionate designers and architects, looking to
+  <div id='bio'> Welcome to our online portfolio, we are small group of passionate designers and architects, looking to
     change and create amazing digital images to inspire others to follow in our innovative steps. Free Architect
-    WordPress Theme</p>
+    WordPress Theme </div>
 </div>
 
-{{#each galleryItems}}
-<div>
-  <a href="/gallery/{{id}}">
-    <img src="{{link}}" alt="{{description}}">
-  </a>
-  <p class="img-title">{{description}}</p>
-  <p class="link">{{link}}</p>
+<div id="pictures">
+  {{#each galleryItems}}
+  <div id="photos">
+    <a href="/gallery/{{id}}">
+      <img src="{{link}}" alt="{{description}}">
+    </a>
+    <p class="img-title">{{description}}</p>
+    <p class="photoLink">{{link}}</p>
+  </div>
+  {{/each}}
+
 </div>
-{{/each}}
 
 <br><br>
-<a href="/gallery/new">Add New Photo</a>
+<a class="redirect" href="/gallery/new"><i class="far fa-image"></i> Add New Photo</a>
 <br><br>

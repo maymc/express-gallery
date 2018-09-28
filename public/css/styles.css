@@ -1,7 +1,76 @@
 body{
-  background-color: aqua;
+  margin: 50px 120px;
 }
+
+#header {
+  display: flex;
+  flex-flow: row wrap;
+  border-top: 1px lightgray solid;
+  margin-bottom: 60px;
+}
+
+#title{
+  flex: 1 1 600px;
+  font-size: 3.5em;
+  font-weight: bolder;
+  margin: 10px 0;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(156, 154, 154);
+}
+
+#bio{
+  flex: 1 1 200px;
+  font-size: 0.75em;
+  margin: 10px 0;
+  border-left: 1px lightgray solid;
+  padding: 0 0 0 20px;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(187, 185, 185);
+}
+
+#pictures{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+#photos{
+  flex: 1 1 20%;
+  display: inline-block;
+}
+
 img{
   width: 400px;
   height: 200px;
+}
+
+.img-title{
+  margin: 0;
+  display: block;
+}
+
+.photoLink{
+  margin: 0;
+  display: block;
+}
+
+a:link{
+  color: rgb(187, 185, 185);
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+}
+
+a:link:hover{
+  color: rgb(138, 135, 135);
+}
+
+.redirect{
+  font-size: 1.2em;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(187, 185, 185);
+}
+
+.redirect:hover{
+  color: rgb(138, 135, 135);
 }
