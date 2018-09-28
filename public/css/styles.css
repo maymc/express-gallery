@@ -53,3 +53,24 @@ img{
   margin: 0;
   display: block;
 }
+
+a:link{
+  color: rgb(187, 185, 185);
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+}
+
+a:link:hover{
+  color: rgb(138, 135, 135);
+}
+
+.redirect{
+  font-size: 1.2em;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(187, 185, 185);
+}
+
+.redirect:hover{
+  color: rgb(138, 135, 135);
+}
