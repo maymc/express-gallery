@@ -11,14 +11,13 @@ each gallery photo should include a link to edit this gallery photo --}}
 </div>
 <br>
 
-<div>
-  <p>{{description}} - {{link}}</p>
-  <p>By: {{author}}</p>
-  <img src={{link}} alt="{{description}}">
+<div id="singleImgDesc">
+  <p>{{description}} -- {{link}} | by: {{author}}</p>
+  <img id="singleImg" src={{link}} alt="{{description}}">
 </div>
 
 <br><br>
-<a class="edit" href="/gallery/{{id}}/edit"><i class="fas fa-pencil-alt"></i> Edit Photo</a>
+<a class="redirect" href="/gallery/{{id}}/edit"><i class="fas fa-pencil-alt"></i> Edit Photo</a>
 <br><br>
 
 <a class="redirect" href="/"><i class="fas fa-angle-double-left"></i> Back to gallery</a>
