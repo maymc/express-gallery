@@ -40,7 +40,7 @@ Router.get('/gallery/:id', (req, res) => {
 
 //GET - render out get gallery home route
 Router.get('/', (req, res) => {
-  knex.raw('SELECT * FROM gallery')
+  knex.raw('SELECT * FROM gallery ORDER BY id ASC')
     .then(results => {
       console.log("results.rows:\n", results.rows);
       const featurePhoto = results.rows[0];
