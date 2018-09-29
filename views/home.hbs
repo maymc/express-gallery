@@ -9,10 +9,18 @@
 </div>
 
 <div id="pictures">
+  <div id="mainPhoto">
+    <a href="/gallery/{{featurePhoto.id}}">
+      <img id="featurePhoto" src="{{featurePhoto.link}}" alt="{{featurePhoto.description}}">
+    </a>
+    <p class="img-title">{{featurePhoto.description}}</p>
+    <p class="photoLink">{{featurePhoto.link}}</p>
+  </div>
+
   {{#each galleryItems}}
   <div id="photos">
     <a href="/gallery/{{id}}">
-      <img src="{{link}}" alt="{{description}}">
+      <img class="otherPhotos" src="{{link}}" alt="{{description}}">
     </a>
     <p class="img-title">{{description}}</p>
     <p class="photoLink">{{link}}</p>

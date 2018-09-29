@@ -43,10 +43,12 @@ Router.get('/', (req, res) => {
   knex.raw('SELECT * FROM gallery')
     .then(results => {
       console.log("results.rows:\n", results.rows);
+      const featurePhoto = results.rows[0];
       const galleryItems = results.rows;
+      galleryItems.shift();
       console.log("\ngallery:", galleryItems);
 
-      res.render('home', { galleryItems });
+      res.render('home', { featurePhoto, galleryItems });
     })
 });
 
