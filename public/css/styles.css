@@ -90,7 +90,44 @@ p {
   height: 550px;
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+.formTitle{
+  font-size: 2em;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(187, 185, 185);
+}
+
+label{
+  font-size: 1.2em;
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(187, 185, 185);
+}
+
+textarea{
+  width: 300px;
+  height: 50px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+input[type=submit] {
+  font-family: 'Montserrat', sans-serif;
+  /* border-radius: 15px; */
+  font-size: 1.2em;
+  padding: 5px 20px;
+  margin: 10px 0;
+  border-radius: 15px;
+  box-shadow: 0 3px #999; }
+
+  input[type=submit]:hover {
+    background-color: rgb(217, 247, 220);
+    color: black;
+  }
+  
+  input[type=submit]:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px); 
+  }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -114,3 +151,5 @@ a:link:hover{
 .redirect:hover{
   color: rgb(138, 135, 135);
 }
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
