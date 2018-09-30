@@ -79,8 +79,14 @@ Router.post('/gallery', (req, res) => {
   console.log("\nreq.body:", req.body);
   const gallery = req.body;
   console.log("\ngallery:", gallery);
-
-  knex.raw(`INSERT INTO gallery (author, link, description) VALUES ('${gallery.author}', '${gallery.link}', '${gallery.description}')`)
+  const newPhoto = {
+    author: req.body.author,
+    link: req.body.link,
+    description: req.body.description
+  }
+  Gallery
+    .forge(newPhoto)
+    .save()
     .then(() => {
       res.redirect('/');
     })
