@@ -3,9 +3,13 @@ const express = require('express');
 const Router = express.Router();
 knex = require('../knex/knex.js');
 
+//Provide access Users and Gallery object
+const Users = require('../db/models/users_table.js');
+const Gallery = require('../db/models/gallery_table.js');
+
 //GET - render out a "new photo" form
 Router.get('/gallery/new', (req, res) => {
-  console.log("IM HEREEEE");
+  console.log("\n This is GET - /gallery/new");
   res.render("new");
 });
 

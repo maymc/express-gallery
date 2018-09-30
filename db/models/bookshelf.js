@@ -1,2 +1,2 @@
-const knex = require('../knex');
+const knex = require('../../knex/knex.js');
 module.exports = require('bookshelf')(knex);
