@@ -30,10 +30,14 @@ Router.get('/gallery/:id/edit', (req, res) => {
 //GET - render out gallery picture details
 Router.get('/gallery/:id', (req, res) => {
   console.log("\nThis is GET /gallery/:id");
+  console.log("req.params:", req.params);
   const { id } = req.params;
-  knex.raw(`SELECT * FROM gallery WHERE id = ${id}`)
+  console.log("id:", id);
+  Gallery
+    .where('id', id)
+    .fetch()
     .then(results => {
-      const galleryPhoto = results.rows[0];
+      const galleryPhoto = results.toJSON();
       console.log("\nGET photo results:", galleryPhoto);
       res.render('galleryPhoto', galleryPhoto);
     })
@@ -44,38 +48,22 @@ Router.get('/gallery/:id', (req, res) => {
 
 //GET - render out get gallery home route
 Router.get('/', (req, res) => {
-  // knex.raw('SELECT * FROM gallery ORDER BY id ASC')
-  //   .then(results => {
-  //     console.log("results.rows:\n", results.rows);
-  //     const featurePhoto = results.rows[0];
-  //     const galleryItems = results.rows;
-  //     galleryItems.shift();
-  //     console.log("\ngallery:", galleryItems);
-
-  //     res.render('home', { featurePhoto, galleryItems });
-  //   })
+  console.log("\nThis is GET /");
   Gallery
     .forge()
     .orderBy('id', 'ASC')
     .fetchAll()
     .then(results => {
-      // console.log("\nresults:", results);
-      // const featurePhoto = results[0].toJSON();
-      // const galleryItems = results.toJSON();
-      // galleryItems.shift();
-      // console.log("\nfeaturePhoto:", featurePhoto);
-      // console.log("\ngalleryItems:", galleryItems);
-
       let galleryItems = results.toJSON();
+      let featurePhoto = galleryItems[0];
       console.log("\ngalleryItems:", galleryItems);
-      console.log("\ngalleryItems[0]:", galleryItems[0]);
-      // galleryItems.shift();
-      // console.log("\ngalleryItems:", galleryItems);
-      res.render('home', { galleryItems });
+      console.log("\nfeaturePhoto:", featurePhoto);
+      galleryItems.shift();
+      res.render('home', { featurePhoto, galleryItems });
     })
     .catch(err => {
-
-    })
+      res.json("Error with getting gallery", err)
+    });
 });
 
 // POST - Create a new gallery photo
