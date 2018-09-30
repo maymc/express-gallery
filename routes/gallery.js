@@ -125,14 +125,6 @@ Router.put('/gallery/:id', (req, res) => {
 //delete gallery picture
 Router.delete('/gallery/:id', (req, res) => {
   const { id } = req.params;
-  // knex.raw(`DELETE FROM gallery WHERE id = '${id}'`)
-  //   .then(result => {
-  //     res.redirect('/');
-  //   })
-  //   .catch(err => {
-  //     console.log('error, err');
-  //     res.redirect('/');
-  //   })
 
   Gallery
     .where("id", id)
