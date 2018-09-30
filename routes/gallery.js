@@ -20,12 +20,6 @@ Router.get('/gallery/:id/edit', (req, res) => {
 
   const { id } = req.params;
   console.log("\nid:", id)
-  // knex.raw(`SELECT * FROM gallery WHERE id = '${id}'`)
-  //   .then(result => {
-  //     const photoToEdit = result.rows[0];
-  //     console.log("photoToEdit:", photoToEdit);
-  //     res.render('edit', photoToEdit);
-  //   })
 
   Gallery
     .where('id', id)
