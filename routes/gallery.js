@@ -97,7 +97,7 @@ Router.post('/gallery', (req, res) => {
 
 //PUT - edit gallery photo
 Router.put('/gallery/:id', (req, res) => {
-  console.log("This is PUT /gallery/:id");
+  console.log("\nThis is PUT /gallery/:id");
   console.log("\nPUT - req.params:", req.params);
   console.log("\nPUT - req.body:", req.body);
 
