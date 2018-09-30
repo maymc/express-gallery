@@ -44,15 +44,37 @@ Router.get('/gallery/:id', (req, res) => {
 
 //GET - render out get gallery home route
 Router.get('/', (req, res) => {
-  knex.raw('SELECT * FROM gallery ORDER BY id ASC')
-    .then(results => {
-      console.log("results.rows:\n", results.rows);
-      const featurePhoto = results.rows[0];
-      const galleryItems = results.rows;
-      galleryItems.shift();
-      console.log("\ngallery:", galleryItems);
+  // knex.raw('SELECT * FROM gallery ORDER BY id ASC')
+  //   .then(results => {
+  //     console.log("results.rows:\n", results.rows);
+  //     const featurePhoto = results.rows[0];
+  //     const galleryItems = results.rows;
+  //     galleryItems.shift();
+  //     console.log("\ngallery:", galleryItems);
 
-      res.render('home', { featurePhoto, galleryItems });
+  //     res.render('home', { featurePhoto, galleryItems });
+  //   })
+  Gallery
+    .forge()
+    .orderBy('id', 'ASC')
+    .fetchAll()
+    .then(results => {
+      // console.log("\nresults:", results);
+      // const featurePhoto = results[0].toJSON();
+      // const galleryItems = results.toJSON();
+      // galleryItems.shift();
+      // console.log("\nfeaturePhoto:", featurePhoto);
+      // console.log("\ngalleryItems:", galleryItems);
+
+      let galleryItems = results.toJSON();
+      console.log("\ngalleryItems:", galleryItems);
+      console.log("\ngalleryItems[0]:", galleryItems[0]);
+      // galleryItems.shift();
+      // console.log("\ngalleryItems:", galleryItems);
+      res.render('home', { galleryItems });
+    })
+    .catch(err => {
+
     })
 });
 
