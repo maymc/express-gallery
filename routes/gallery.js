@@ -103,8 +103,18 @@ Router.put('/gallery/:id', (req, res) => {
 
   const { id } = req.params;
 
-  knex.raw(`UPDATE gallery SET author = '${req.body.author}', link = '${req.body.link}', description = '${req.body.description}' WHERE id = ${id}`)
-    .then(() => {
+  const updatedPhoto = {
+    author: req.body.author,
+    link: req.body.link,
+    description: req.body.description
+  }
+
+  Gallery
+    .where('id', id)
+    .fetch()
+    .then(results => {
+      console.log("results:", results);
+      results.save(updatedPhoto);
       res.redirect(`/gallery/${id}`);
     })
     .catch(err => {
