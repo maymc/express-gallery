@@ -3,9 +3,13 @@ const express = require('express');
 const Router = express.Router();
 knex = require('../knex/knex.js');
 
+//Provide access Users and Gallery object
+const Users = require('../db/models/users_table.js');
+const Gallery = require('../db/models/gallery_table.js');
+
 //GET - render out a "new photo" form
 Router.get('/gallery/new', (req, res) => {
-  console.log("IM HEREEEE");
+  console.log("\n This is GET - /gallery/new");
   res.render("new");
 });
 
@@ -26,10 +30,14 @@ Router.get('/gallery/:id/edit', (req, res) => {
 //GET - render out gallery picture details
 Router.get('/gallery/:id', (req, res) => {
   console.log("\nThis is GET /gallery/:id");
+  console.log("req.params:", req.params);
   const { id } = req.params;
-  knex.raw(`SELECT * FROM gallery WHERE id = ${id}`)
+  console.log("id:", id);
+  Gallery
+    .where('id', id)
+    .fetch()
     .then(results => {
-      const galleryPhoto = results.rows[0];
+      const galleryPhoto = results.toJSON();
       console.log("\nGET photo results:", galleryPhoto);
       res.render('galleryPhoto', galleryPhoto);
     })
@@ -40,16 +48,22 @@ Router.get('/gallery/:id', (req, res) => {
 
 //GET - render out get gallery home route
 Router.get('/', (req, res) => {
-  knex.raw('SELECT * FROM gallery ORDER BY id ASC')
+  console.log("\nThis is GET /");
+  Gallery
+    .forge()
+    .orderBy('id', 'ASC')
+    .fetchAll()
     .then(results => {
-      console.log("results.rows:\n", results.rows);
-      const featurePhoto = results.rows[0];
-      const galleryItems = results.rows;
+      let galleryItems = results.toJSON();
+      let featurePhoto = galleryItems[0];
+      console.log("\ngalleryItems:", galleryItems);
+      console.log("\nfeaturePhoto:", featurePhoto);
       galleryItems.shift();
-      console.log("\ngallery:", galleryItems);
-
       res.render('home', { featurePhoto, galleryItems });
     })
+    .catch(err => {
+      res.json("Error with getting gallery", err)
+    });
 });
 
 // POST - Create a new gallery photo
