@@ -1,15 +1,56 @@
 const express = require('express');
 const Router = express.Router();
 const Users = require('../db/models/users_table.js');
+// const passport = require('passport');
+// const LocalStrategy = require('passport-local');
+// const bcrypt = require('bcrypt');
+
+// //Passport setup
+// passport.serializeUser((user, done) => {
+//   console.log("\nSerializing user:", user);
+//   done(null, {
+//     username: user.username,
+//     password: user.password
+//   })
+// });
+// passport.deserializeUser((user, done) => {
+//   console.log("\nDeserializing user:", user);
+//   done(null, user);
+// });
+// //This finds the user
+// passport.use(new LocalStrategy({ usernameField: 'username' }, (username, password, done) => {
+//   console.log("LocalStrategy...");
+//   Users
+//     .where({ username })
+//     .fetch()
+//     .then(user => {
+//       console.log('user in localstrategy db', user);
+//       bcrypt.compare(password, user.attributes.password)
+//         .then(result => {
+//           if (result) {
+//             done(null, user);
+//           }
+//           else {
+//             done(null, false);
+//           }
+//         })
+//         .catch(err => {
+//           done(err);
+//         })
+//     })
+//     .catch(err => {
+//       done(err);
+//     })
+// }));
 
 //GET - /logout, user is logged out of site
 Router.get('/logout', (req, res) => {
   console.log('This is POST - /logout');
   req.session.destroy();
+  // req.logout();
   console.log('You have been logged out.');
-  res.send('You are logged out.');
-  // res.redirect('/');
-})
+  res.redirect('/');
+});
 
 //Might need this one for login form, one for actual login
 Router.get('/login', (req, res) => {
@@ -51,6 +92,7 @@ Router.post('/register', (req, res) => {
 //POST - /login, users login with username and password
 Router.post('/login', (req, res) => {
   console.log('This is POST - /login');
+  // res.send("Authenicated! Welcome!")
   const { username, password } = req.body;
   Users
     .where({ username: username }) //can also be .where({username})
@@ -71,10 +113,5 @@ Router.post('/login', (req, res) => {
     })
 });
 
+
 module.exports = Router;
-// const express = require('express');
-// const Router = express.Router();
-// const Users = require('../db/models/Users.js');
-// const passport = require('passport');
-// const LocalStrategy = require('passport-local');
-// const bcrypt = require('bcryptjs');
