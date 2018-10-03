@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 
 //Passport setup
 
-//Upon successful login, get user from database, save user data into session which is in Redis
+//Upon successful login, get the user from the database and save the userdata into the session which is in Redis
 passport.serializeUser((user, done) => {
   console.log("\nSerializing user:\n", user);
   done(null, {
@@ -17,13 +17,15 @@ passport.serializeUser((user, done) => {
   });
 });
 
-//Upon successful authorized request, we will take some information from the session to retrieve the user record from db and put it into req.user
+//Upon successful authorized request, we will take some information from the session to retrieve the user record from db and put it into req.user. 
+//Deserializing stores it in req.user. It grabs a key from the session to access user from db so you can access from req.user
 passport.deserializeUser((user, done) => {
   console.log("\nDeserializing user:\n", user);
   Users
-    .where({ id: user.username })
+    .where({ username: user.username })
     .fetch()
     .then(user => {
+      //When you access a protected route, it throws your object into req.user
       done(null, user.attributes)
     })
     .catch(err => {
@@ -31,7 +33,7 @@ passport.deserializeUser((user, done) => {
     })
 });
 
-//This finds the user and if it doesn't find the user then it will give an error, if not the user passes
+//This finds the user and if it doesn't find the user then it will give an error
 passport.use(new LocalStrategy({ usernameField: 'username' }, (username, password, done) => {
   console.log("---> LocalStrategy is working...");
   Users
@@ -39,18 +41,20 @@ passport.use(new LocalStrategy({ usernameField: 'username' }, (username, passwor
     .fetch()
     .then(user => {
       console.log('---> LocalStrategy user:', user);
+
       bcrypt.compare(password, user.attributes.password)
         .then(result => {
           console.log("Compare - password:", password);
           console.log("Compare - localstrategy password:", user.attributes.password);
           console.log("LocalStrategy Result:", result);
+
           if (result) {
-            console.log("---> LocalStrategy results is true:", result);
-            console.log("**User is authenticated.");
+            console.log("---> LocalStrategy result:", result);
+            console.log("---> User is authenticated.");
             done(null, user);
           }
           else {
-            console.log("---> LocalStrategy results is false:", result);
+            console.log("---> LocalStrategy result:", result);
             done(null, false);
           }
         })
@@ -66,12 +70,6 @@ passport.use(new LocalStrategy({ usernameField: 'username' }, (username, passwor
 }));
 
 //~~~~~GET, POST, PUT, DELETE routes~~~~~//
-
-//Might need this one for login form, one for actual login
-Router.get('/login', (req, res) => {
-  console.log('This is GET - /auth/login');
-  req.render('login');
-});
 
 //POST - /register, users can register their own accounts
 Router.post('/register', (req, res) => {
@@ -99,27 +97,41 @@ Router.post('/register', (req, res) => {
 
 //POST - /login, users login with username and password
 Router.post('/login', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
-  //If passes, then this block executes
-  res.send('Yay authenticated!');
+  //If passes LocalStrategy and serializing, then this block executes
+  res.send('You are authenticated.');
 })
+
+//Might need this one for login form, one for actual login
+Router.get('/login', (req, res) => {
+  console.log('This is GET - /auth/login');
+  res.render('login');
+});
 
 //GET - /logout, user is logged out of site
 Router.get('/logout', (req, res) => {
   console.log('This is POST - /auth/logout');
   req.logout();
   console.log('You have been logged out.');
-  res.redirect('/');
+  res.redirect('/login');
 });
 
 //Used to keep track of sessions to check if a user is logged in or not. Use logic to determine this
-Router.get('/protected', (req, res) => {
+Router.get('/protected', isAuthenticated, (req, res) => {
   console.log('This is GET - /auth/protected');
+  // res.render('myAwesomeDashboard', { user: req.user });
+});
+
+//custom middleware
+function isAuthenticated(req, res, next) {
+  //if it is authenticated then i will go to next middleware function in chain otherwise redirect to homepage. To use this, use router-level middleware
   if (req.isAuthenticated()) {
-    res.send('Welcome back!');
+    console.log("AUTHENTICATED!")
+    next();
   }
   else {
-    res.send('Please login to access this site.');
+    console.log("Not Authenticated.")
+    res.redirect('/');
   }
-});
+}
 
 module.exports = Router;
