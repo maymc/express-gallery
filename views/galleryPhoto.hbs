@@ -12,7 +12,7 @@ each gallery photo should include a link to edit this gallery photo --}}
 <br>
 
 <div id="singleImgDesc">
-  <p>{{description}} -- {{link}} | by: {{author}}</p>
+  <p>{{description}} | By: {{author}} | {{link}} </p>
   <img id="singleImg" src={{link}} alt="{{description}}">
 </div>
 
@@ -20,9 +20,9 @@ each gallery photo should include a link to edit this gallery photo --}}
 <a class="redirect" href="/gallery/{{id}}/edit"><i class="fas fa-pencil-alt"></i> Edit Photo</a>
 <br><br>
 
-<br><br>
 <form method='post' action='/gallery/{{id}}?_method=DELETE'>
-<button type="submit">Delete picture</button>
+  {{!-- <button type="submit">Delete picture</button> --}}
+  <a class="redirect" href="/"><i class="far fa-trash-alt"></i> Delete</a>
 </form>
 <br><br>
 

@@ -54,6 +54,10 @@ Router.get('/gallery/:id', (req, res) => {
     })
 });
 
+Router.get('/login', (req, res) => {
+  res.render('login');
+});
+
 //GET - render out get gallery home route
 Router.get('/', (req, res) => {
   console.log("\nThis is GET /");
@@ -97,7 +101,7 @@ Router.post('/gallery', (req, res) => {
 
 //PUT - edit gallery photo
 Router.put('/gallery/:id', (req, res) => {
-  console.log("This is PUT /gallery/:id");
+  console.log("\nThis is PUT /gallery/:id");
   console.log("\nPUT - req.params:", req.params);
   console.log("\nPUT - req.body:", req.body);
 
