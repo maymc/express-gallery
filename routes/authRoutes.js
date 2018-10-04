@@ -107,6 +107,11 @@ Router.get('/login', (req, res) => {
   res.render('login');
 });
 
+Router.get('/register', (req, res) => {
+  console.log('\nThis is GET - /auth/register');
+  res.render('register');
+})
+
 //GET - /logout, user is logged out of site
 Router.get('/logout', (req, res) => {
   console.log('\nThis is POST - /auth/logout');
