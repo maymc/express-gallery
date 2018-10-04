@@ -52,7 +52,6 @@ passport.use(new LocalStrategy({ usernameField: 'username' }, (username, passwor
             console.log("---> LocalStrategy result:", result);
             console.log("---> User is authenticated.");
             done(null, user);
-
           }
           else {
             console.log("---> LocalStrategy result:", result);
@@ -72,6 +71,32 @@ passport.use(new LocalStrategy({ usernameField: 'username' }, (username, passwor
 
 //~~~~~GET, POST, PUT, DELETE routes~~~~~//
 
+Router.get('/register', (req, res) => {
+  console.log('\nThis is GET - /auth/register');
+  let isRegistering = true;
+  res.render('register', { isRegistering });
+})
+
+//Might need this one for login form, one for actual login
+Router.get('/login', (req, res) => {
+  console.log('\nThis is GET - /auth/login');
+  res.render('login');
+});
+
+//Used to keep track of sessions to check if a user is logged in or not. Use logic to determine this
+Router.get('/protected', isAuthenticated, (req, res) => {
+  console.log('\nThis is GET - /auth/protected');
+  // res.render('myAwesomeDashboard', { user: req.user });
+});
+
+//GET - /logout, user is logged out of site
+Router.get('/logout', (req, res) => {
+  console.log('\nThis is POST - /auth/logout');
+  req.logout();
+  console.log('You have been logged out.');
+  res.redirect('/login');
+});
+
 //POST - /register, users can register their own accounts
 Router.post('/register', (req, res) => {
   console.log('\nThis is POST - /auth/register');
@@ -87,7 +112,7 @@ Router.post('/register', (req, res) => {
       if (result && username !== "" && password !== "") {
         // res.send("New user has been registered.");
         console.log("\nNew user has been registered.");
-        res.render('login');
+        res.redirect('login');
       }
       else {
         isInvalidRegistration = true;
@@ -103,36 +128,14 @@ Router.post('/register', (req, res) => {
 });
 
 //POST - /login, users login with username and password
-Router.post('/login', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
+Router.post('/login', passport.authenticate('local', { failureRedirect: '/auth/login' }), (req, res) => {
   //If passes LocalStrategy and serializing, then this block executes
-  res.send('You are authenticated.');
+  // res.send('You are authenticated.');
+  console.log("\nYou are authenticated.")
+  res.redirect('/');
 })
 
-//Might need this one for login form, one for actual login
-Router.get('/login', (req, res) => {
-  console.log('\nThis is GET - /auth/login');
-  res.render('login');
-});
 
-Router.get('/register', (req, res) => {
-  console.log('\nThis is GET - /auth/register');
-  let isRegistering = true;
-  res.render('register', { isRegistering });
-})
-
-//GET - /logout, user is logged out of site
-Router.get('/logout', (req, res) => {
-  console.log('\nThis is POST - /auth/logout');
-  req.logout();
-  console.log('You have been logged out.');
-  res.redirect('/login');
-});
-
-//Used to keep track of sessions to check if a user is logged in or not. Use logic to determine this
-Router.get('/protected', isAuthenticated, (req, res) => {
-  console.log('\nThis is GET - /auth/protected');
-  // res.render('myAwesomeDashboard', { user: req.user });
-});
 
 //custom middleware
 function isAuthenticated(req, res, next) {
@@ -143,7 +146,7 @@ function isAuthenticated(req, res, next) {
   }
   else {
     console.log("Not Authenticated.")
-    res.redirect('/');
+    res.redirect('/login');
   }
 }
 
