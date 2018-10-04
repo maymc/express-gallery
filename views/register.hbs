@@ -2,6 +2,7 @@
   <div id='title'>_ARCHITEKT</div>
 </div>
 
+{{#with isRegistering}}
 <div id="registerBox">
   <h1 id="registerTitle">Register</h1>
   <form id="registerForm" action="/auth/register" method="post">
@@ -14,3 +15,20 @@
     <input class="submitBtn" type="submit" value="Submit">
   </form>
 </div>
+{{/with}}
+
+{{#with isInvalidRegistration}}
+<div id="registerBox">
+  <h1 id="registerTitle">Register</h1>
+  <p>Invalid username or password. Please try again.</p>
+  <form id="registerForm" action="/auth/register" method="post">
+    Username:<br>
+    <input type="text" name="username">
+    <br><br>
+    Password:<br>
+    <input type="password" name="password">
+    <br><br><br>
+    <input class="submitBtn" type="submit" value="Submit">
+  </form>
+</div>
+{{/with}}

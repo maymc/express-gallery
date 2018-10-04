@@ -52,6 +52,7 @@ passport.use(new LocalStrategy({ usernameField: 'username' }, (username, passwor
             console.log("---> LocalStrategy result:", result);
             console.log("---> User is authenticated.");
             done(null, user);
+
           }
           else {
             console.log("---> LocalStrategy result:", result);
@@ -74,6 +75,7 @@ passport.use(new LocalStrategy({ usernameField: 'username' }, (username, passwor
 //POST - /register, users can register their own accounts
 Router.post('/register', (req, res) => {
   console.log('\nThis is POST - /auth/register');
+  let isInvalidRegistration = false;
   const { username, password } = req.body;
   bcrypt.hash(password, 10)
     .then(hashedPassword => {
@@ -82,11 +84,16 @@ Router.post('/register', (req, res) => {
         .save()
     })
     .then(result => {
-      if (result) {
-        res.send("New user has been registered.");
+      if (result && username !== "" && password !== "") {
+        // res.send("New user has been registered.");
+        console.log("\nNew user has been registered.");
+        res.render('login');
       }
       else {
-        res.send("Error w/registering new user.")
+        isInvalidRegistration = true;
+        // res.send("Error w/registering new user.")
+        console.log("\nError w/registering new user.");
+        res.render('register', { isInvalidRegistration });
       }
     })
     .catch(err => {
@@ -109,7 +116,8 @@ Router.get('/login', (req, res) => {
 
 Router.get('/register', (req, res) => {
   console.log('\nThis is GET - /auth/register');
-  res.render('register');
+  let isRegistering = true;
+  res.render('register', { isRegistering });
 })
 
 //GET - /logout, user is logged out of site
