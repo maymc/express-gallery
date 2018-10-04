@@ -4,6 +4,7 @@ services:
     image: may-jason/express-gallery:${IMAGE_VERSION}-local
     depends_on:
       - db
+      - redis-session-store
     command: ["./node_modules/.bin/nodemon", "server.js"]
     container_name: express-gallery
     volumes:
@@ -24,16 +25,15 @@ services:
       - '${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}'
     networks:
       - my-app-network
-  redis:
+  redis-session-store:
     image: redis:4.0-alpine
     env_file: .env
     volumes:
       - redis-data-volume:/data
-    ports: 
+    ports:
       - '${REDIS_HOST_PORT}:${REDIS_CONTAINER_PORT}'
     networks:
       - my-app-network
-
 volumes: 
   pg-data-volume:
   redis-data-volume:
