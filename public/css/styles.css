@@ -17,6 +17,7 @@ body{
   margin: 10px 0;
   font-family: 'Montserrat', sans-serif;
   color: rgb(156, 154, 154);
+  text-decoration: none;
 }
 
 #bio{
@@ -131,6 +132,17 @@ input[type=submit] {
     transform: translateY(4px); 
   }
 
+  #loginForm{
+    font-size: 1.5em;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(187, 185, 185);
+  }
+  
+  input[type=text], input[type=password]{
+    height: 40px;
+    width: 200px;
+    font-size: 1em;
+  }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 a:link{

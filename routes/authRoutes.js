@@ -73,7 +73,7 @@ passport.use(new LocalStrategy({ usernameField: 'username' }, (username, passwor
 
 //POST - /register, users can register their own accounts
 Router.post('/register', (req, res) => {
-  console.log('This is POST - /auth/register');
+  console.log('\nThis is POST - /auth/register');
   const { username, password } = req.body;
   bcrypt.hash(password, 10)
     .then(hashedPassword => {
@@ -103,13 +103,13 @@ Router.post('/login', passport.authenticate('local', { failureRedirect: '/' }), 
 
 //Might need this one for login form, one for actual login
 Router.get('/login', (req, res) => {
-  console.log('This is GET - /auth/login');
+  console.log('\nThis is GET - /auth/login');
   res.render('login');
 });
 
 //GET - /logout, user is logged out of site
 Router.get('/logout', (req, res) => {
-  console.log('This is POST - /auth/logout');
+  console.log('\nThis is POST - /auth/logout');
   req.logout();
   console.log('You have been logged out.');
   res.redirect('/login');
@@ -117,7 +117,7 @@ Router.get('/logout', (req, res) => {
 
 //Used to keep track of sessions to check if a user is logged in or not. Use logic to determine this
 Router.get('/protected', isAuthenticated, (req, res) => {
-  console.log('This is GET - /auth/protected');
+  console.log('\nThis is GET - /auth/protected');
   // res.render('myAwesomeDashboard', { user: req.user });
 });
 

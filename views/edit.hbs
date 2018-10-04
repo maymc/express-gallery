@@ -24,5 +24,11 @@ description : TextArea --}}
   <br><br>
   <input class="submitBtn" type="submit" value="Submit">
 </form>
+
+<br>
+<form action="/gallery/{{id}}?_method=DELETE" method="post">
+  <input class="submitBtn" type="submit" value="Delete">
+</form>
+
 <br>
 <a class="redirect" href="/"><i class="fas fa-angle-double-left"></i> Back to gallery</a>
