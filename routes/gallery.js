@@ -54,6 +54,10 @@ Router.get('/gallery/:id', (req, res) => {
     })
 });
 
+Router.get('/login', (req, res) => {
+  res.render('login');
+});
+
 //GET - render out get gallery home route
 Router.get('/', (req, res) => {
   console.log("\nThis is GET /");
