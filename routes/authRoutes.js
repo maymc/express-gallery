@@ -71,40 +71,22 @@ passport.use(new LocalStrategy({ usernameField: 'username' }, (username, passwor
 
 //~~~~~GET, POST, PUT, DELETE routes~~~~~//
 
-//POST - /register, users can register their own accounts
-Router.post('/register', (req, res) => {
-  console.log('\nThis is POST - /auth/register');
-  const { username, password } = req.body;
-  bcrypt.hash(password, 10)
-    .then(hashedPassword => {
-      return Users
-        .forge({ username, password: hashedPassword })
-        .save()
-    })
-    .then(result => {
-      if (result) {
-        res.send("New user has been registered.");
-      }
-      else {
-        res.send("Error w/registering new user.")
-      }
-    })
-    .catch(err => {
-      console.log("Error at auth register", err);
-      res.send(err);
-    })
-});
-
-//POST - /login, users login with username and password
-Router.post('/login', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
-  //If passes LocalStrategy and serializing, then this block executes
-  res.send('You are authenticated.');
+Router.get('/register', (req, res) => {
+  console.log('\nThis is GET - /auth/register');
+  let isRegistering = true;
+  res.render('register', { isRegistering });
 })
 
 //Might need this one for login form, one for actual login
 Router.get('/login', (req, res) => {
   console.log('\nThis is GET - /auth/login');
   res.render('login');
+});
+
+//Used to keep track of sessions to check if a user is logged in or not. Use logic to determine this
+Router.get('/protected', isAuthenticated, (req, res) => {
+  console.log('\nThis is GET - /auth/protected');
+  // res.render('myAwesomeDashboard', { user: req.user });
 });
 
 //GET - /logout, user is logged out of site
@@ -115,11 +97,45 @@ Router.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-//Used to keep track of sessions to check if a user is logged in or not. Use logic to determine this
-Router.get('/protected', isAuthenticated, (req, res) => {
-  console.log('\nThis is GET - /auth/protected');
-  // res.render('myAwesomeDashboard', { user: req.user });
+//POST - /register, users can register their own accounts
+Router.post('/register', (req, res) => {
+  console.log('\nThis is POST - /auth/register');
+  let isInvalidRegistration = false;
+  const { username, password } = req.body;
+  bcrypt.hash(password, 10)
+    .then(hashedPassword => {
+      return Users
+        .forge({ username, password: hashedPassword })
+        .save()
+    })
+    .then(result => {
+      if (result && username !== "" && password !== "") {
+        // res.send("New user has been registered.");
+        console.log("\nNew user has been registered.");
+        res.redirect('login');
+      }
+      else {
+        isInvalidRegistration = true;
+        // res.send("Error w/registering new user.")
+        console.log("\nError w/registering new user.");
+        res.render('register', { isInvalidRegistration });
+      }
+    })
+    .catch(err => {
+      console.log("Error at auth register", err);
+      res.send(err);
+    })
 });
+
+//POST - /login, users login with username and password
+Router.post('/login', passport.authenticate('local', { failureRedirect: '/auth/login' }), (req, res) => {
+  //If passes LocalStrategy and serializing, then this block executes
+  // res.send('You are authenticated.');
+  console.log("\nYou are authenticated.")
+  res.redirect('/');
+})
+
+
 
 //custom middleware
 function isAuthenticated(req, res, next) {
@@ -130,7 +146,7 @@ function isAuthenticated(req, res, next) {
   }
   else {
     console.log("Not Authenticated.")
-    res.redirect('/');
+    res.redirect('/login');
   }
 }
 
