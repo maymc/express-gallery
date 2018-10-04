@@ -1,34 +1,45 @@
-{{!-- see a form to edit a gallery photo identified by the :id param
-the form fields are:
-author : Text
-link : Text (the image url)
-description : TextArea --}}
+{{!-- see a form to edit a gallery photo identified by the :id param the form fields are: author : Text link : Text (the
+image url) description : TextArea --}}
 
 <div id="header">
   <div id='title'>_ARCHITEKT</div>
 </div>
 
-<form action="/gallery/{{id}}?_method=PUT" method="post">
-  <h1 class="formTitle">Edit Photo:</h1>
-  <label>Author:<br>
-    <textarea name="author" id="">{{author}}</textarea>
-  </label>
-  <br><br>
-  <label>Link:<br>
-    <textarea name="link" id="">{{link}}</textarea>
-  </label>
-  <br><br>
-  <label>Description:<br>
-    <textarea name="description" id="">{{description}}</textarea>
-  </label>
-  <br><br>
-  <input class="submitBtn" type="submit" value="Submit">
-</form>
+<div id="bigContainer">
 
-<br>
-<form action="/gallery/{{id}}?_method=DELETE" method="post">
-  <input class="submitBtn" type="submit" value="Delete">
-</form>
+  
+    <div id="left">
+      <form action="/gallery/{{id}}?_method=PUT" method="post">
+        <h1 class="formTitle">Edit Photo:</h1>
+        <label>Author:<br>
+          <textarea name="author" id="">{{author}}</textarea>
+        </label>
+        <br><br>
+        <label>Link:<br>
+          <textarea name="link" id="">{{link}}</textarea>
+        </label>
+        <br><br>
+        <label>Description:<br>
+          <textarea name="description" id="">{{description}}</textarea>
+        </label>
+        <br><br>
+        <input class="submitBtn" type="submit" value="Submit">
+      </form>
 
-<br>
-<a class="redirect" href="/"><i class="fas fa-angle-double-left"></i> Back to gallery</a>
+      <br>
+      <form action="/gallery/{{id}}?_method=DELETE" method="post">
+        <input class="submitBtn" type="submit" value="Delete">
+      </form>
+      <br>
+      <a class="redirect" href="/"><i class="fas fa-angle-double-left"></i> Back to gallery</a>
+    </div>
+
+    
+    <br>
+    <br>
+    <div id="right">
+      <img src="{{link}}" id="editImageId" alt="">
+    </div>
+  
+
+</div>
