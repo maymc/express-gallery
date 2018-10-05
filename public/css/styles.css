@@ -166,6 +166,28 @@ a:link:hover{
   color: rgb(138, 135, 135);
 }
 
+#editImageId {
+  height: 400px;
+  width: 700px;
+}
+
+#bigContainer {
+  width: 100%;
+  /* overflow: hidden; */
+}
+
+#left {
+  width: 400px;
+  float: left;
+}
+
+#right {
+  margin: 0;
+  height: 800px;
+  width: 500px;
+  margin-left: 420px
+}
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /* @media only screen and (max-width: 1600px) {
