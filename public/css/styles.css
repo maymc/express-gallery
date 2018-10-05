@@ -95,7 +95,7 @@ p {
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-.formTitle{
+.formTitle, #registerTitle{
   font-size: 2em;
   font-family: 'Montserrat', sans-serif;
   color: rgb(187, 185, 185);
