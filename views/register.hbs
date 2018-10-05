@@ -4,7 +4,7 @@
 
 {{#with isRegistering}}
 <div id="registerBox">
-  <h1 id="registerTitle">Register</h1>
+  <h1 class="formTitle">Register</h1>
   <form id="registerForm" action="/auth/register" method="post">
     Username:<br>
     <input type="text" name="username">
@@ -19,8 +19,8 @@
 
 {{#with isInvalidRegistration}}
 <div id="registerBox">
-  <h1 id="registerTitle">Register</h1>
-  <p>Invalid username or password. Please try again.</p>
+  <h1 class="formTitle">Register</h1>
+  <p id="errMsg">Invalid username or password. Please try again.</p>
   <form id="registerForm" action="/auth/register" method="post">
     Username:<br>
     <input type="text" name="username">
