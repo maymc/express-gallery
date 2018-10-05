@@ -95,7 +95,7 @@ p {
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-.formTitle, #registerTitle{
+.formTitle{
   font-size: 2em;
   font-family: 'Montserrat', sans-serif;
   color: rgb(187, 185, 185);
@@ -132,7 +132,7 @@ input[type=submit] {
     transform: translateY(4px); 
   }
 
-  #loginForm{
+  #loginForm, #registerForm{
     font-size: 1.5em;
     font-family: 'Montserrat', sans-serif;
     color: rgb(187, 185, 185);
@@ -142,6 +142,11 @@ input[type=submit] {
     height: 40px;
     width: 200px;
     font-size: 1em;
+  }
+
+  #errMsg{
+    font-family: 'Montserrat', sans-serif;
+    color: salmon;
   }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 

@@ -135,8 +135,6 @@ Router.post('/login', passport.authenticate('local', { failureRedirect: '/auth/l
   res.redirect('/');
 })
 
-
-
 //custom middleware
 function isAuthenticated(req, res, next) {
   //if it is authenticated then i will go to next middleware function in chain otherwise redirect to homepage. To use this, use router-level middleware
